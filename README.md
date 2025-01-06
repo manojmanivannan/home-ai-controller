@@ -6,50 +6,6 @@ Home AI Controller 💬  is a REST framework running on the Langgraph module and
 - [x] Turn on/off device
 - [ ] Turn on/off all devices in room
 
-## Project Structure
-```bash
-.env
-.env-example
-.gitignore
-.python-version
-docker-compose.yaml
-Dockerfile
-engine/
-    __init__.py
-    __pycache__/
-    apis/
-        __pycache__/
-        api.py
-        opts/
-        router/
-    common/
-        __init__.py
-        __pycache__/
-        logger.py
-        logging.conf
-    configuration/
-        __init__.py
-        __pycache__/
-        config_loader.py
-    framework/
-        __init__.py
-        __pycache__/
-        agents/
-        history/
-        models/
-        tools/
-    main.py
-Makefile
-requirements.txt
-tests/
-    test.configuration.yaml
-venv/
-    bin/
-    include/
-    lib/
-    lib64
-    pyvenv.cfg
-```
 ## Getting Started
 ### Prerequisites
 - Python 3.11.9
@@ -85,7 +41,7 @@ pip install -r requirements.txt
 ```bash
 make run
 ```
-2. Access the API documentation at http://localhost:8001/swagger.
+2. Access the API documentation at http://localhost:8001/swagger. or UI at http://localhost:8501 to chat interactively.
 
 #### Running without docker-compose:
 1. `make venv` to prepare virtual env

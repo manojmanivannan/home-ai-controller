@@ -1,9 +1,10 @@
-.PHONY: venv run
+.PHONY: stop run
 
 SHELL := /bin/bash
 VENV_DIR = venv
 REQ_FILE = requirements.txt
 
+all: stop run
 
 venv:
 	python3 -m venv $(VENV_DIR)

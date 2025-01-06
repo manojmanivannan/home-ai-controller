@@ -4,12 +4,12 @@ import json
 import streamlit.components.v1 as components
 
 api_endpoint =  "http://localhost:8001/"
+device_endpoint = "http://localhost:3000"
 
 with st.sidebar:
     try:
-        requests.get('http://localhost:3000').status_code != 200
-        iframe_src = "http://localhost:3000"
-        components.iframe(iframe_src, height=800)
+        status_code = requests.get(device_endpoint).status_code
+        components.iframe(device_endpoint, height=800)
     except requests.exceptions.ConnectionError:
         st.write("The Home Automation server is not running")
         st.write("Please setup server from https://github.com/manojmanivannan/home-controller")
