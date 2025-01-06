@@ -1,5 +1,5 @@
 # Home AI Controller
-Home AI Controller 💬  is a REST framework running on the LangChain module and open-source LLMs like llama, Mixtral, etc. It provides a conversational AI interface to control home automation devices.
+Home AI Controller 💬  is a REST framework running on the Langgraph module and open-source LLMs like llama, Mixtral, etc. It provides a conversational AI interface to control home automation devices. This works in tandem with [home-controller](https://github.com/manojmanivannan/home-controller) project which servers as the home automation server
 
 ## Features
 - [x] List rooms and devices
@@ -86,6 +86,12 @@ pip install -r requirements.txt
 make run
 ```
 2. Access the API documentation at http://localhost:8001/swagger.
+
+#### Running without docker-compose:
+1. `make venv` to prepare virtual env
+2. `source venv/bin/activate` to activate the virtual env
+3. `source .env` to load env variables
+4. `fastapi run engine/main.py --port 8001`
 
 ### Stopping the Application
 1. Stop the application:
