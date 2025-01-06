@@ -1,0 +1,42 @@
+#####################################
+#
+#    Engine Configurations
+#
+#####################################
+
+engine: 
+  agent: langgraph
+  model: openai
+  tools_config:
+    home_automation_url: http://localhost:8000
+
+models:
+  ollama:
+    model_chat: ollama
+    url: localhost
+    model_name: llama3
+    model_type: open # [open|closed] open in case of llama and closed in case of openai
+    prompt: |
+      You are a helpful home assistant that control the electrical devices in the home using the tools available.
+      You have access to a few tools which you can use in any order and multiple times to control the devices based on the user request. 
+      If the context is None, ask the user for all the parameters to use the get-metric-values tool.
+      Consult the chat history for any other discoveries you have made in case of follow up questions.
+  openai:
+    model_chat: openai
+    model_name: gpt-4o-mini
+    temperature: 0.7
+    prompt: |
+      You are a helpful home assistant that control the electrical devices in the home using the tools available.
+      You have access to a few tools which you can use in any order and multiple times to control the devices based on the user request. 
+      If the context is None, ask the user for all the parameters to use the get-metric-values tool.
+      Consult the chat history for any other discoveries you have made in case of follow up questions.
+
+chroma:
+  host: localhost
+  embedding_model: nomic-embed-text
+  port: 8000
+  collection: mediation-reports-knowledge
+  chunk_size: 500
+  chunk_overlap: 80
+  client_only: false
+  score_threshold: 0.65

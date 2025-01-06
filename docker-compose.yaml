@@ -1,0 +1,11 @@
+services:
+  home-ai-controller:
+    build: .
+    container_name: home-ai-controller
+    ports:
+      - "8001:8001"
+    environment:
+      - PYTHONUNBUFFERED=1
+    env_file:
+      - .env
+    network_mode: host
