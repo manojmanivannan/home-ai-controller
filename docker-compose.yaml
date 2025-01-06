@@ -9,3 +9,11 @@ services:
     env_file:
       - .env
     network_mode: host
+  home-ai-streamlit:
+    build: ./chatbot
+    container_name: home-ai-streamlit
+    ports:
+      - "8501:8501"
+    environment:
+      - PYTHONUNBUFFERED=1
+    network_mode: host
