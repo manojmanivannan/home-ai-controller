@@ -1,7 +1,6 @@
 services:
   home-ai-controller:
     build: .
-    container_name: home-ai-controller
     ports:
       - "8001:8001"
     environment:
@@ -11,7 +10,6 @@ services:
     network_mode: host
   home-ai-streamlit:
     build: ./chatbot
-    container_name: home-ai-streamlit
     ports:
       - "8501:8501"
     environment:
