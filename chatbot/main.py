@@ -12,7 +12,7 @@ with st.sidebar:
         components.iframe(device_endpoint, height=800)
     except requests.exceptions.ConnectionError:
         st.write("The Home Automation server is not running")
-        st.write("Please setup server from https://github.com/manojmanivannan/home-controller")
+        st.write("Please setup server from https://github.com/manojmanivannan/home-automation-server")
 
 
 st.title("💬 Home Device Controller")
