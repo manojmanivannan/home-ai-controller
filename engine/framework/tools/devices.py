@@ -14,7 +14,7 @@ class DevicesListTool(ErrorHandleBaseTool):
 
     name = "get-devices-list"
     description = (
-        "Tool to retrieve the list of all available devices. useful if device's exact name is not known."
+        "Tool to retrieve the list of all available devices and room_id. useful if device's exact name or its room ID is not known."
     )
     args_schema: Type[BaseModel] = DevicesListInput
     return_direct: bool = False

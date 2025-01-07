@@ -27,17 +27,19 @@ class BaseEngineChatApi:
         ...
 
 class EngineChatApi(BaseEngineChatApi):
-    def __init__(self):
+    def __init__(self, conversation_id: str):
         self._agent: BaseAgent = AgentFactory.get_agent()
         self._history: ConversationHistoryInterface = ConversationHistoryFactory.get_history()
-        self._history.create_conversation("12345")
+        if not self._history.get_conversation(conversation_id):
+            log.info(f"Creating new conversation with id {conversation_id}")
+            self._history.create_conversation(conversation_id)
         super().__init__()
 
     # def create_conversation(self):
     #     chat_history = self._history.create_conversation("12345", "Test conversation")
     #     return chat_history.id
 
-    def make_user_prompt(self, question: str):
-        log.debug(f"Asking agent with question {question}")
-        response = self._agent.get_response(chat_history=self._history.get_conversation("12345"), user_prompt=HumanMessage(content=question))
+    def make_user_prompt(self, question: str, conversation_id: str):
+        log.debug(f"Asking agent with question {question} in conversation {conversation_id}")
+        response = self._agent.get_response(chat_history=self._history.get_conversation(conversation_id), user_prompt=HumanMessage(content=question))
         return ConversationResponse(answer=response.content)

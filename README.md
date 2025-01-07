@@ -1,5 +1,5 @@
 # Home AI Controller
-Home AI Controller 💬  is a REST framework running on the Langgraph module and open-source LLMs like llama, Mixtral, etc. It provides a conversational AI interface to control home automation devices. This works in tandem with [home-controller](https://github.com/manojmanivannan/home-controller) project which servers as the home automation server
+Home AI Controller 💬  is a REST framework running on the Langgraph module and open-source LLMs like llama, Mixtral, or OpenAI, etc. It provides a conversational AI interface to control home automation devices. This works only in tandem with [home-controller](https://github.com/manojmanivannan/home-controller) project which servers as the home automation server
 
 ## Features
 - [x] List rooms and devices
@@ -56,11 +56,25 @@ make stop
 ```
 
 ## Configuration
-Configuration is managed through the ConfigLoader class in `config_loader.py`. The configuration file path is specified in the `.env` file.
+Configuration to the AI framework is managed through `configuration.yaml` and `.env`. 
+
+In `configuration.yaml`, set the language model to use under `engine:`, if you choose `openai`, then set the `OPENAI_API_KEY` of if you choose `ollama`, then set the `OLLAMA_HOST` in `.env` file.
 
 ### Logging
-Logging configuration is defined in logging.conf.
+Logging configuration is defined in `logging.conf`.
 
 ## API Endpoints
 - Health Check: GET /health
 - Ask Question: POST / (defined in conversation.py)
+
+### Example
+```bash
+curl -X 'POST' \
+  'http://localhost:8001/' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{ 
+        "conversation_id": "123123", 
+        "question": "are you sure ?" 
+  }'
+```

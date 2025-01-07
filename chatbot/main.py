@@ -2,9 +2,13 @@ import streamlit as st
 import requests
 import json
 import streamlit.components.v1 as components
+import uuid
 
 api_endpoint =  "http://localhost:8001/"
 device_endpoint = "http://localhost:3000"
+
+if 'conversation_id' not in st.session_state:
+   st.session_state.conversation_id = str(uuid.uuid4())
 
 with st.sidebar:
     try:
@@ -33,7 +37,7 @@ if prompt := st.chat_input():
             "accept": "application/json",
             "Content-Type": "application/json"
         }
-        payload = {"question": prompt}
+        payload = {"question": prompt, "conversation_id": st.session_state.conversation_id}
         response = requests.post(api_endpoint, headers=headers, data=json.dumps(payload))
 
         if response.status_code == 200:
