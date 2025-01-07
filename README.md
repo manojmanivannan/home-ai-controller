@@ -1,5 +1,5 @@
 # Home AI Controller
-Home AI Controller 💬  is a REST framework running on the Langgraph module and open-source LLMs like llama, Mixtral, or OpenAI, etc. It provides a conversational AI interface to control home automation devices. This works only in tandem with [home-controller](https://github.com/manojmanivannan/home-controller) project which servers as the home automation server
+Home AI Controller 💬  is a REST framework running on the Langgraph module and open-source LLMs like llama, Mixtral, or OpenAI, etc. It provides a conversational AI interface to control home automation devices. This works only in tandem with [home-automation-server](https://github.com/manojmanivannan/home-automation-server) project which servers as the home automation server
 
 ## Features
 - [x] List rooms and devices
