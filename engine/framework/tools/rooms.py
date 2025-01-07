@@ -14,7 +14,7 @@ class RoomsListTool(ErrorHandleBaseTool):
 
     name = "get-rooms-list"
     description = (
-        "Tool to retrieve the list of all available rooms. useful if room's exact name is not known."
+        "Tool to retrieve the list of all available rooms and room_id. useful if room's exact name or ID is not known."
     )
     args_schema: Type[BaseModel] = RoomsListInput
     return_direct: bool = False
