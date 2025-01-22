@@ -6,7 +6,7 @@
 
 engine: 
   agent: langgraph
-  model: ollama
+  model: openai
   tools_config:
     home_automation_url: http://localhost:8000 # server running from project https://github.com/manojmanivannan/home-automation-server
 

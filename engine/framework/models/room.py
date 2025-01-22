@@ -15,8 +15,8 @@ class DeviceToggleInput(BaseModel):
     device_name: str = Field(
         description="Name of the device to toggle", default=""
     )
-    room_name: str = Field(
-        description="Name of the room which contains the device to toggle. Can be obtained using get-devices-list tool or get-rooms-list tool", default=""
+    room_id: str = Field(
+        description="ID of the room which contains the device to toggle. Can be obtained using get-devices-list tool or get-rooms-list tool", default=""
     )
     action: Literal['on','off'] = Field(
         description="Toggle the device 'on' or 'off'", default="on"
