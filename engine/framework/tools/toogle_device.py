@@ -1,4 +1,4 @@
-from typing import Type, Literal
+from typing import Type, Literal, Union
 from langchain.pydantic_v1 import BaseModel
 from ..models.room import DeviceToggleInput
 from ...common.logger import log
@@ -14,7 +14,7 @@ class ToggleDeviceTool(ErrorHandleBaseTool):
 
     name = "toogle-devices-on-or-off"
     description = (
-        "Tool to toggle a device ON or OFF. Exact device name and room_id is required."
+        "Tool to toggle a single device ON or OFF. Exact device name and room_id is required. Use it multiple times to toggle multiple devices."
     )
     args_schema: Type[BaseModel] = DeviceToggleInput
     return_direct: bool = False
@@ -65,12 +65,13 @@ class ToggleDeviceTool(ErrorHandleBaseTool):
             room_name=room_name
         )
 
-    def _toggle_device(self, device_name: str = "", room_id: int = None, action: str="on") -> list:
+    def _toggle_device(self, device_name: str = "", room_id: Union[str,int] = None, action: str="on") -> list:
         if action == 'on':
             url = ConfigLoader().home_automation_url+f"/turnon/"
         else:
             url = ConfigLoader().home_automation_url+f"/turnoff/"
 
+        room_id = int(room_id) if room_id.isnumeric() else room_id
         log.debug(f"Making API call to '{url}' togggle the device {device_name}")
         devices_list = json.loads(requests.post(url=url, data=json.dumps({"name":device_name,"room_id":room_id})).text)
         # in case of wrong metric or dimension, aggregators_list will be empty
