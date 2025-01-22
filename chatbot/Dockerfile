@@ -7,6 +7,7 @@ WORKDIR /app
 # Install the dependencies
 RUN pip install --no-cache-dir streamlit
 
+COPY .streamlit/ ./.streamlit/
 # Copy the rest of the application code into the container
 COPY main.py /app
 

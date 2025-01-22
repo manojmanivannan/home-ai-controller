@@ -4,6 +4,8 @@ import json
 import streamlit.components.v1 as components
 import uuid
 
+st.set_page_config(page_title="Home Device Controller")
+
 api_endpoint =  "http://localhost:8001/"
 device_endpoint = "http://localhost:3000"
 
@@ -20,7 +22,7 @@ with st.sidebar:
 
 
 st.title("💬 Home Device Controller")
-st.caption("🚀 A Streamlit chatbot")
+st.caption("🚀 A Streamlit chatbot to control your devices")
 if "messages" not in st.session_state:
     st.session_state["messages"] = [{"role": "assistant", "content": "How can I help you?"}]
 
