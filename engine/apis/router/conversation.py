@@ -12,5 +12,5 @@ router = APIRouter()
 
 @router.post("/", response_model=ConversationResponse)
 async def make_prompt(question: ConversationCreate):
-    log.info(f"Received request to invoke question: {question.question}")
-    return BaseEngineChatApi.subsclasses[0]().make_user_prompt(question.question)
+    log.info(f"Received request to invoke question: {question.question} [{question.conversation_id}]")
+    return BaseEngineChatApi.subsclasses[0](question.conversation_id).make_user_prompt(question.question, question.conversation_id)

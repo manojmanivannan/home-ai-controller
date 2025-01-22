@@ -197,9 +197,9 @@ class LanggraphAgent(BaseAgent):
 
         except GraphRecursionError:
             log.error("Agent stopped due to recursion limit.")
-            return "I was not able to properly find an answer for your question after exhausting all tools, please try again..", []
+            return "I was not able to help with your request after exhausting all tools, please try again..", []
         except Exception as e:
             log.error("Unexpected exception caught:" + str(e))
-            return "I was not able to properly find an answer for your question, please try again..", []
+            return f"I was not able to help with your request, due to {e} please try again..", []
 
         return messages["messages"][-1].content, [{'name': t[0].get('name'),'args':t[0].get('args')} for t in tool_called if t]

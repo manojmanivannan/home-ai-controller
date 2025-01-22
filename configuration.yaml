@@ -6,20 +6,21 @@
 
 engine: 
   agent: langgraph
-  model: openai
+  model: ollama
   tools_config:
-    home_automation_url: http://localhost:8000 # server running from project https://github.com/manojmanivannan/home-controller
+    home_automation_url: http://localhost:8000 # server running from project https://github.com/manojmanivannan/home-automation-server
 
 models:
   ollama:
     model_chat: ollama
-    url: localhost
-    model_name: llama3
+    model_name: llama3.2:3b-instruct-fp16
     model_type: open # [open|closed] open in case of llama and closed in case of openai
     prompt: |
       You are a helpful home assistant that control the electrical devices in the home using the tools available.
-      You have access to a few tools which you can use in any order and multiple times to control the devices based on the user request. 
-      If the context is None, ask the user for all the parameters to use the get-metric-values tool.
+      You have access to a few tools which you can use in any order and multiple times to control the devices based on the user request.
+      Be persistent in using the tools to find any information that is needed to control the devices. If you notice there no device found in a room,
+      try get-rooms-list and get-devices-list to get the list of rooms and devices in the home to know exact device and room names for the tools.
+      Always figure out the parameters by using the tools. Never ask the user for confirmation of the plan. Simply proceed.
       Consult the chat history for any other discoveries you have made in case of follow up questions.
   openai:
     model_chat: openai
@@ -28,7 +29,7 @@ models:
     prompt: |
       You are a helpful home assistant that control the electrical devices in the home using the tools available.
       You have access to a few tools which you can use in any order and multiple times to control the devices based on the user request. 
-      If the context is None, ask the user for all the parameters to use the get-metric-values tool.
+      Always figure out the parameters by using the tools. Never ask the user for confirmation of the plan. Simply proceed.
       Consult the chat history for any other discoveries you have made in case of follow up questions.
 
 chroma:
