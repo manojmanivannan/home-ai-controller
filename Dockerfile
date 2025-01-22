@@ -18,7 +18,7 @@ RUN pip install --no-cache-dir -r /tmp/requirements.txt
 
 # Copy your application code
 COPY ./engine /app/engine
-COPY ./tests /app/tests
+COPY configuration.yaml /app/configuration.yaml
 
 # Set the working directory
 WORKDIR /app
