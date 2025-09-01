@@ -1,5 +1,5 @@
 from typing import Optional, Literal
-from langchain.pydantic_v1 import BaseModel, Field
+from pydantic import BaseModel, Field
 
 class RoomsListInput(BaseModel):
     room_name: Optional[str] = Field(
@@ -15,8 +15,8 @@ class DeviceToggleInput(BaseModel):
     device_name: str = Field(
         description="Name of the device to toggle", default=""
     )
-    room_id: str = Field(
-        description="ID of the room which contains the device to toggle. Can be obtained using get-devices-list tool or get-rooms-list tool", default=""
+    room_name: str = Field(
+        description="Name of the room which contains the device to toggle. Can be obtained using get-devices-list tool or get-rooms-list tool", default=""
     )
     action: Literal['on','off'] = Field(
         description="Toggle the device 'on' or 'off'", default="on"

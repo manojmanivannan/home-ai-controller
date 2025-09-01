@@ -154,7 +154,7 @@ class LanggraphAgent(BaseAgent):
                 (
                     "system",
                     f"{ConfigLoader().model_config.prompt}"
-                    f"\nTools available for you to use are {[t.name for t in tools]}"
+                    # f"\nTools available for you to use are {[t.name for t in tools]}"
                     # "\nYou have this context: {mediation_doc}."
                     "\nCurrent datetime: {current_date_time}."
                 ),
