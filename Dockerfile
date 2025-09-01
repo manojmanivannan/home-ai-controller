@@ -22,4 +22,6 @@ COPY configuration.yaml /app/configuration.yaml
 
 # Set the working directory
 WORKDIR /app
-CMD ["fastapi", "run", "engine/main.py","--port","8001"]
+# CMD ["fastapi", "run", "engine/main.py","--port","8001"]
+CMD ["uvicorn", "engine.main:app", "--host", "0.0.0.0", "--port", "8001"]
+

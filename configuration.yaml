@@ -13,7 +13,7 @@ engine:
 models:
   ollama:
     model_chat: ollama
-    model_name: llama3.1
+    model_name: gpt-oss:latest
     model_type: open # [open|closed] open in case of llama and closed in case of openai
     prompt: |
       You are a highly reliable and helpful home assistant designed to control electrical devices in the home based on user requests. Follow these guidelines:

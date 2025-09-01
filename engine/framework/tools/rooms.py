@@ -1,5 +1,5 @@
 from typing import Type
-from langchain.pydantic_v1 import BaseModel
+from pydantic import BaseModel
 from ..models.room import RoomsListInput
 from ...common.logger import log
 from langchain.tools.base import ToolException
@@ -10,10 +10,10 @@ from langchain_core.runnables import RunnableConfig
 import json
 
 class RoomsListTool(ErrorHandleBaseTool):
-    ACCEPT_VERSION = "1.0.0"
+    ACCEPT_VERSION: str = "1.0.0"
 
-    name = "get-rooms-list"
-    description = (
+    name: str = "get-rooms-list"
+    description: str = (
         "Tool to retrieve the list of all available rooms and room_id. useful if room's exact name or ID is not known."
     )
     args_schema: Type[BaseModel] = RoomsListInput

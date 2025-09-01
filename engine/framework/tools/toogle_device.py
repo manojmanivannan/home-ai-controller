@@ -1,5 +1,5 @@
 from typing import Type, Literal, Union
-from langchain.pydantic_v1 import BaseModel
+from pydantic import BaseModel
 from ..models.room import DeviceToggleInput
 from ...common.logger import log
 from langchain.tools.base import ToolException
@@ -10,10 +10,10 @@ from langchain_core.runnables import RunnableConfig
 import json
 
 class ToggleDeviceTool(ErrorHandleBaseTool):
-    ACCEPT_VERSION = "1.0.0"
+    ACCEPT_VERSION: str = "1.0.0"
 
-    name = "toogle-devices-on-or-off"
-    description = (
+    name: str = "toogle-devices-on-or-off"
+    description: str = (
         "Tool to toggle a single device ON or OFF. Exact device name and room_id is required. Use it multiple times to toggle multiple devices."
     )
     args_schema: Type[BaseModel] = DeviceToggleInput
@@ -28,7 +28,7 @@ class ToggleDeviceTool(ErrorHandleBaseTool):
         self,
         config: RunnableConfig, #for langchain 0.2.41 RunnableConfig is only injected if defined as mandatory (https://www.reddit.com/r/LangChain/comments/1esdvq2/passing_config_to_langgraph_tool_discrepancies/)
         device_name: str = None,
-        room_id: int = None,
+        room_name: str = None,
         action: Literal['on','off'] = 'on'
         
     ) -> list:
@@ -39,7 +39,7 @@ class ToggleDeviceTool(ErrorHandleBaseTool):
             log.debug("Calling toogle-devices-on-or-off tool")
             devices_list = self._toggle_device(
                     device_name=device_name,
-                    room_id=room_id,
+                    room_name=room_name,
                     action=action
                 )
 
@@ -65,15 +65,15 @@ class ToggleDeviceTool(ErrorHandleBaseTool):
             room_name=room_name
         )
 
-    def _toggle_device(self, device_name: str = "", room_id: Union[str,int] = None, action: str="on") -> list:
+    def _toggle_device(self, device_name: str = "", room_name: str = None, action: str="on") -> list:
         if action == 'on':
             url = ConfigLoader().home_automation_url+f"/turnon/"
         else:
             url = ConfigLoader().home_automation_url+f"/turnoff/"
 
-        room_id = int(room_id) if room_id.isnumeric() else room_id
+        # room_id = int(room_id) if room_id.isnumeric() else room_id
         log.debug(f"Making API call to '{url}' togggle the device {device_name}")
-        devices_list = json.loads(requests.post(url=url, data=json.dumps({"name":device_name,"room_id":room_id})).text)
+        devices_list = json.loads(requests.post(url=url, data=json.dumps({"name":device_name,"room_name":room_name})).text)
         # in case of wrong metric or dimension, aggregators_list will be empty
         # so, invoke the API again without metric and dimension which will list all dimensions and metrics
         return devices_list
